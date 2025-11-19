@@ -1,5 +1,4 @@
 CACHE MANIFEST 
-#VERSION 1.0
 
 CACHE: 
 1.jpg
@@ -19,14 +18,14 @@ loader.js
 payload.js
 Style.css
 theme.html
-payloads\backup.bin
-payloads\disabled_update.bin
-payloads\enabled_update.bin
-payloads\gamedumper.bin
-payloads\installergta5rdr2prx.bin
-payloads\pkgbackup.bin
-payloads\ps4debug.bin
-payloads\restore.bin
+payloads/backup.bin
+payloads/disabled_update.bin
+payloads/enabled_update.bin
+payloads/gamedumper.bin
+payloads/installergta5rdr2prx.bin
+payloads/pkgbackup.bin
+payloads/ps4debug.bin
+payloads/restore.bin
 
 NETWORK: 
 * 
