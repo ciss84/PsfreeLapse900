@@ -4942,6 +4942,17 @@ async function doJBwithPSFreeLapseExploit() {
       return;
     }
     await lapse_init();
+    /*try {
+      chain.sys('setuid', 0);
+    }
+    catch (e) {
+      localStorage.ExploitLoaded = "no";
+    }
+    if (localStorage.ExploitLoaded === "yes" && sessionStorage.ExploitLoaded != "yes") {
+      runBinLoader();
+      return new Promise(() => {}); // In order to keep BinLoader always alive
+    }*/
+    // If setuid is successful, we dont need to run the kexploit again
     try {
         if (chain.sys('setuid', 0) == 0) {
             showMessage("GoldHen already loaded !..."),
@@ -5017,7 +5028,7 @@ async function doJBwithPSFreeLapseExploit() {
     window.log("GoldHen Loaded Successfully !...");
     load_exploit_done();
     localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
-    EndTimer();   
+    EndTimer();    
   } catch (error) {
     window.log("An error occured during Lapse\nPlease restart console and try again...\nError definition: " + error);
   }
