@@ -4865,7 +4865,7 @@ function checkPlatformIsSupported() {
 // Main Jailbreak Function =======================================================================
 //================================================================================================
 async function doJBwithPSFreeLapseExploit() {
-  //StartTimer();
+  StartTimer();
   if (!checkPlatformIsSupported()) {
     window.log("Unsupported platform detected! Designed for PS4 9.00");
     /*
@@ -5010,14 +5010,14 @@ async function doJBwithPSFreeLapseExploit() {
     jb_step_status = await PayloadLoader("goldhen.bin", 1); // Read payload from .bin file
     if (jb_step_status !== 1) {
       window.log("Failed to load HEN!\nPlease restart console and try again...");
-      //localStorage.failcount = ++localStorage.failcount;window.failCounter.innerHTML=localStorage.failcount;
+      localStorage.failcount = ++localStorage.failcount;window.failCounter.innerHTML=localStorage.failcount;
       return;
     }
     showMessage("GoldHen Loaded Successfully !..."),
     window.log("GoldHen Loaded Successfully !...");
     load_exploit_done();
-    //localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
-    //EndTimer();   
+    localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
+    EndTimer();   
   } catch (error) {
     window.log("An error occured during Lapse\nPlease restart console and try again...\nError definition: " + error);
   }
