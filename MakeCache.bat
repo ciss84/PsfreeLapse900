@@ -1,6 +1,7 @@
 @echo off
 
 echo CACHE MANIFEST > test0.txt
+echo #VERSION 1.1 >> test0.txt
 echo. >> test0.txt
 echo CACHE: >> test0.txt
 
@@ -26,11 +27,6 @@ setlocal enabledelayedexpansion
 >>"%textFile%" echo(!line:%search%=%replace%!
 endlocal)
 
-REM Convert backslashes to forward slashes for web compatibility
-powershell -Command "(Get-Content test.txt) -replace '\\', '/' | Set-Content test2.txt"
-del test.txt
-ren test2.txt test.txt
-
 setlocal DisableDelayedExpansion
 set "firstLineReady="
 (for /F "eol=$ delims=" %%a in (test.txt) DO (
@@ -42,4 +38,4 @@ del test.txt
 
 echo 84ciss.manifest created!!
 
-timeout /t 2 >nul
+sleep 2
