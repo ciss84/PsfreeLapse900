@@ -1,65 +1,152 @@
-<html manifest="84ciss.manifest"><head>
-<title>JAILBREAK 9.00</title>
-<link rel="stylesheet prefetch" href="Style.css">
-<script>history.replaceState(null,null,'index.html');</script>
+<html manifest="84ciss.manifest">
+<head>
+    <meta charset="utf-8">
+    <title>JAILBREAK 9.00</title>
+    <link rel="stylesheet" href="Style.css">
+    <script>history.replaceState(null, null, 'index.html');</script>
+    <style>
+        body {
+            background-size: cover;
+            color: white;
+            font-family: system-ui;
+            text-align: center;
+        }
+        .titlehead {
+            color: #fff;
+            font-size: 28px;
+            text-shadow: 3px 2px #3d3939;
+        }
+        #myProgress {
+            width: 80%;
+            max-width: 500px;
+            background-color: #333;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 40px;
+        }
+        #myBar {
+            width: 0%;
+            height: 40px;
+            background-color: #4CAF50;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            font-weight: bold;
+            transition: width 0.3s;
+        }
+    </style>
 </head>
 
-	<body >		
+<body>
+    <br><br><br>
+    <h1 id="progress" class="titlehead">Loading.. Please Wait</h1>
+    <div id="myProgress">
+        <div id="myBar">0%</div>
+    </div>
+
     <script>
-                if(window.applicationCache.status==2){localStorage.is755BCached=true;}
-        	window.applicationCache.ondownloading=function(){document.getElementById("progress").innerHTML="Page Caching Started!!";localStorage.is755BCached=false;};
-		window.applicationCache.onprogress=function(a){document.getElementById("myBar").style.width=(Math.round(100*(a.loaded/a.total)))+"%";document.getElementById("myBar").innerHTML=(Math.round(100*(a.loaded/a.total)))+"%";};
-		window.applicationCache.oncached=function(){document.getElementById("progress").innerHTML="Page Cached Successfully!!";localStorage.is755BCached=true;setTimeout(function(){window.location.reload("myBar"); }, 2500);};
-                window.applicationCache.onupdateready=function(){document.getElementById("progress").innerHTML="Update Cache Successfully!!";localStorage.is755BCached=true;setTimeout(function(){window.location.reload("myBar"); }, 2500);};
-        	window.applicationCache.onnoupdate=function(){window.location.replace("lndex.html");};
-        	window.applicationCache.onerror=function(){window.location.replace("lndex.html");};
-        </script>
-			<script>
-			var width = 0;
-			function frame1() {
-				var elem = document.getElementById("myBar");
-				var i=0;
-				var id = setInterval(fra, 10);
-				function fra(){
-				  if(i<10 && width<100){
-					  width++;
-					  elem.style.width = width + "%";
-					  elem.innerHTML = width  + "%";
-				  } i++;
-				}
-			}
-		</script>	
-		<h1 id="progress" class="titlehead">Loading.. Please Wait </h1><hr><br>
-		<h1 id="myProgress">
-		  <div id="myBar">0%</div>
-		</h1>
-</div>
-<script type="text/javascript">
- if(localStorage.getItem("theme")==null){
-   localStorage.setItem("theme","1.jpg")
- }
- document.body.style.background = "url('"+localStorage.getItem("theme")+"')"
- document.body.style.backgroundSize = "cover"
- var imgs = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"];
- render()
- function render(){
-     document.querySelector(".themes").innerHTML=""
-	 for(let i=0;i<imgs.length;i++){
-	    var selectText = "Select"
-	    var textColor = "white"
-	    if(localStorage.theme==imgs[i]){
-	      selectText="Selected"
-	      textColor="green"
-	    }
-	 	document.querySelector(".themes").innerHTML+='<div class="theme" ><img src="'+imgs[i]+'" ><span style="color:'+textColor+';" onclick="set('+i+')">'+selectText+'</span></div>';
-	 }
- }
- function set(i){
-    localStorage.setItem("theme",imgs[i])
-    render()
- 	document.body.style.background = "url('"+imgs[i]+"')"
- 	document.body.style.backgroundSize = "cover"
- }
-</script>	
-	</body>
+        // Fonction de redirection avec délai
+        function redirectToMain() {
+            setTimeout(function() {
+                window.location.replace("lndex.html");
+            }, 200);
+        }
+
+        // Vérifier si AppCache est supporté
+        if (window.applicationCache) {
+            var appCache = window.applicationCache;
+            
+            // Cache checking
+            appCache.onchecking = function() {
+                document.getElementById("progress").innerHTML = "Checking Cache...";
+            };
+
+            // Téléchargement en cours
+            appCache.ondownloading = function() {
+                document.getElementById("progress").innerHTML = "Caching Started...";
+                localStorage.is755BCached = "false";
+            };
+
+            // Progression du téléchargement
+            appCache.onprogress = function(e) {
+                if (e.lengthComputable) {
+                    var percent = Math.round((e.loaded / e.total) * 100);
+                    document.getElementById("myBar").style.width = percent + "%";
+                    document.getElementById("myBar").innerHTML = percent + "%";
+                }
+            };
+
+            // Cache terminé (première fois)
+            appCache.oncached = function() {
+                document.getElementById("progress").innerHTML = "Cache Complete!";
+                document.getElementById("myBar").style.width = "100%";
+                document.getElementById("myBar").innerHTML = "100%";
+                localStorage.is755BCached = "true";
+                setTimeout(function() {
+                    window.location.replace("lndex.html");
+                }, 1500);
+            };
+
+            // Mise à jour du cache prête
+            appCache.onupdateready = function() {
+                document.getElementById("progress").innerHTML = "Update Ready!";
+                document.getElementById("myBar").style.width = "100%";
+                document.getElementById("myBar").innerHTML = "100%";
+                localStorage.is755BCached = "true";
+                try {
+                    appCache.swapCache();
+                } catch(e) {}
+                setTimeout(function() {
+                    window.location.replace("lndex.html");
+                }, 1500);
+            };
+
+            // Pas de mise à jour nécessaire (cache déjà à jour)
+            appCache.onnoupdate = function() {
+                document.getElementById("progress").innerHTML = "Loading...";
+                document.getElementById("myBar").style.width = "100%";
+                document.getElementById("myBar").innerHTML = "100%";
+                localStorage.is755BCached = "true";
+                redirectToMain();
+            };
+
+            // Cache obsolète
+            appCache.onobsolete = function() {
+                document.getElementById("progress").innerHTML = "Cache Obsolete - Redirecting...";
+                redirectToMain();
+            };
+
+            // Erreur de cache
+            appCache.onerror = function() {
+                document.getElementById("progress").innerHTML = "Cache Error - Redirecting...";
+                setTimeout(function() {
+                    window.location.replace("lndex.html");
+                }, 1000);
+            };
+
+            // Si le cache est déjà IDLE (prêt), rediriger
+            if (appCache.status === appCache.UNCACHED || 
+                appCache.status === appCache.IDLE) {
+                if (localStorage.is755BCached === "true") {
+                    redirectToMain();
+                }
+            }
+
+        } else {
+            // AppCache non supporté, rediriger directement
+            document.getElementById("progress").innerHTML = "Redirecting...";
+            window.location.replace("lndex.html");
+        }
+    </script>
+
+    <script>
+        // Thème de fond
+        if (localStorage.getItem("theme") == null) {
+            localStorage.setItem("theme", "1.jpg");
+        }
+        document.body.style.background = "url('" + localStorage.getItem("theme") + "')";
+        document.body.style.backgroundSize = "cover";
+    </script>
+</body>
 </html>
