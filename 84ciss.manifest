@@ -1,5 +1,5 @@
 CACHE MANIFEST 
-#VERSION 2.0
+#VERSION 2.01 
 
 CACHE: 
 1.jpg
@@ -8,6 +8,7 @@ CACHE:
 4.jpg
 5.jpg
 6.jpg
+900.elf
 bundle.js
 bundle_reference.js
 cache.html
@@ -16,6 +17,7 @@ hen.png
 index.html
 loader.js
 payload.js
+README.md
 Style.css
 theme.html
 payloads\backup.bin

@@ -5004,7 +5004,7 @@ async function doJBwithPSFreeLapseExploit() {
     window.log("\nKernel exploit succeeded");
     await sleep(500); // Wait 500ms
     // Inject aio_patches payload
-    jb_step_status = await PayloadLoader("aio_patches.bin", 0); // Read payload from Byte array
+    jb_step_status = await PayloadLoader("900.elf", 1); // Read payload from Byte array
     if (jb_step_status !== 1) {
       window.log("Failed to load AIO fix!\nPlease restart console and try again...");
       return;
