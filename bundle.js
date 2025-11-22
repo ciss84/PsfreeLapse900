@@ -4942,12 +4942,14 @@ async function doJBwithPSFreeLapseExploit() {
       return;
     }
     await lapse_init();
-    try {
-      //chain.sys('setuid', 0);   
+    try {   
         if (chain.sys('setuid', 0) == 0) {
             showMessage("GoldHen already loaded !..."),
             window.log("GoldHen already loaded !.");
-            return true;
+            load_exploit_done();
+            localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
+            EndTimer();
+            return;
         }
     }
     catch (e) {}
