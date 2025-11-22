@@ -5003,13 +5003,13 @@ async function doJBwithPSFreeLapseExploit() {
     }
     window.log("\nKernel exploit succeeded");
     await sleep(500); // Wait 500ms
-    // Inject aio_patches payload
-    jb_step_status = await PayloadLoader("aio_patches.bin", 0); // Read payload from Byte array
+    // Inject 900.elf payload
+    jb_step_status = await PayloadLoader("900.elf", 1); // Read payload from .elf file
     if (jb_step_status !== 1) {
-      window.log("Failed to load AIO fix!\nPlease restart console and try again...");
+      window.log("Failed to load 900.elf!\nPlease restart console and try again...");
       return;
     }
-    window.log("AIO fixes applied");
+    window.log("900.elf loaded successfully");
     await sleep(500); // Wait 500ms
     // Inject HEN payload
     jb_step_status = await PayloadLoader("goldhen.bin", 1); // Read payload from .bin file
