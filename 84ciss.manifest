@@ -1,5 +1,5 @@
 CACHE MANIFEST 
-#VERSION 2.0 
+#VERSION 1.1 
 
 CACHE: 
 1.jpg
@@ -8,6 +8,7 @@ CACHE:
 4.jpg
 5.jpg
 6.jpg
+84ciss.manifest
 bundle.js
 bundle_reference.js
 cache.html
