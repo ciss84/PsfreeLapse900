@@ -1,100 +1,89 @@
-<!DOCTYPE html>
 <html manifest="psfree_lapse.cache">
-<head>
-    <meta charset="UTF-8">
-    <title>Host Auto Cache(FW 4.XX-5.XX)</title>
-    <link rel="stylesheet prefetch" href="Style.css">
-    <script>
-        history.replaceState(null, null, 'index.html');
-    </script>
-</head>
-
-<body>
-    <!-- Titre de progression -->
-    <h1 id="progress" class="titlehead">Loading.. Please Wait !!</h1>
-    <hr>
-    <br>
-    
-    <!-- Barre de progression -->
-    <h1 id="myProgress">
-        <div id="myBar">0%</div>
-    </h1>
-    
-    <!-- Footer -->
-    <div style="background-color:#043836; color:white; position:fixed; left:0; bottom:0; width:100%; text-align:center;">
-        <font style='color:#87FF33'>Modder & Dev : </font>84Ciss - Find Me In Tweeter if you have any kind of issues !&nbsp;
-        <a href="https://twitter.com/84Ciss" style='font-size:20px; text-align:center; color:yellow;'>@84Ciss</a>
-        <br>
-        <font style='color:#87FF33'>Special thanks : </font>*Many Many Thanks to all Contributors in PS4/PS5 Scene ∆★*
+  <head>
+    <meta charset="utf-8">
+    <title>PS4 Jailbreak</title>
+    <style>
+      body {
+        background-color: #252526;
+        color: #cccccc;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        text-align: center;
+      }
+      h2 {
+        margin-bottom: 20px;
+      }
+      #console {
+        font-family: monospace;
+        background-color: #1e1e1e;
+        color: #cccccc;
+        border: 1px solid #3c3c3c;
+        padding: 12px;
+        border-radius: 6px;
+        margin-top: 20px;
+        text-align: left;
+      }
+      #jailbreakBtn {
+        margin-top: 20px;
+        padding: 12px 24px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        background: #555555;
+        color: #aaaaaa;
+        cursor: not-allowed;
+        opacity: 0.7;
+        box-shadow: none;
+      }
+      footer {
+        margin-top: 30px;
+        font-size: 14px;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>PSFree: A PS4 9.00 Exploit Chain</h2>
+    <div>
+      <button id="jailbreakBtn">Start Jailbreak</button>
     </div>
-
-    <!-- Gestion du cache d'application -->
-    <script>
-        // Vérifier l'état du cache
-        if (window.applicationCache.status == 2) {
-            localStorage.is755BCached = true;
-        }
-        
-        // Événement: Début du téléchargement
-        window.applicationCache.ondownloading = function() {
-            document.getElementById("progress").innerHTML = "Page Caching Started!!";
-            localStorage.is755BCached = false;
-        };
-        
-        // Événement: Progression du téléchargement
-        window.applicationCache.onprogress = function(a) {
-            var percent = Math.round(100 * (a.loaded / a.total));
-            document.getElementById("myBar").style.width = percent + "%";
-            document.getElementById("myBar").innerHTML = percent + "%";
-        };
-        
-        // Événement: Cache terminé
-        window.applicationCache.oncached = function() {
-            document.getElementById("progress").innerHTML = "Page Cached Successfully!!";
-            localStorage.is755BCached = true;
-            setTimeout(function() {
-                window.location.reload("myBar");
-            }, 1500);
-        };
-        
-        // Événement: Mise à jour terminée
-        window.applicationCache.onupdateready = function() {
-            document.getElementById("progress").innerHTML = "Update Cache Successfully!!";
-            localStorage.is755BCached = true;
-            setTimeout(function() {
-                window.location.reload("myBar");
-            }, 1500);
-        };
-        
-        // Événement: Pas de mise à jour
-        window.applicationCache.onnoupdate = function() {
-            window.location.replace("lndex.html");
-        };
-        
-        // Événement: Erreur
-        window.applicationCache.onerror = function() {
-            window.location.replace("lndex.html");
-        };
-    </script>
-
-    <!-- Animation de la barre de progression -->
-    <script>
-        var width = 0;
-        
-        function frame1() {
-            var elem = document.getElementById("myBar");
-            var i = 0;
-            var id = setInterval(fra, 10);
-            
-            function fra() {
-                if (i < 10 && width < 100) {
-                    width++;
-                    elem.style.width = width + "%";
-                    elem.innerHTML = width + "%";
-                }
-                i++;
-            }
-        }
-    </script>
-</body>
+    <pre id="console"></pre>
+    <footer>
+      UI Designed by <strong>Feyzee</strong>
+    </footer>
+  </body>
+  <script>
+    // Clear history and prevent back navigation
+    history.replaceState(null, null, 'index.html');
+    var histlength = history.length;
+    history.go(-histlength);
+    // Logging utility
+    const outputConsole = document.getElementById("console");
+    window.log = (msg) => { outputConsole.textContent += msg + "\n"; };
+    // Download progress (% display)
+    function DLProgress(e) {
+      const percent = (Math.round((e.loaded / e.total) * 100));
+      window.log(`[CACHE] Downloading... ${percent}% complete.`);
+    }
+    // On cache complete
+    function DisplayCacheProgress() {
+      window.log(" ");
+      window.log("[SUCCESS] Cache installed successfully.");
+      window.log("Page will reload in 3 seconds...");
+      // Delay to show success message before navigation
+      setTimeout(function() { window.log("Reloading..."); }, 2000);
+      // Navigate back to index.html to load the exploit from cache
+      setTimeout(function() { location.reload(); }, 3000);
+    }
+    // Event listeners
+    window.applicationCache.addEventListener("progress", DLProgress, false);
+    window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
+    window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
+    // Initialization message on DOM load
+    document.addEventListener('DOMContentLoaded', () => {
+      outputConsole.textContent = ""; // Clear console log
+      window.log("AppCache download initiating...");
+      window.log("Please wait, this may take a few seconds.");
+    });
+  </script>
 </html>
