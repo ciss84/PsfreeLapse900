@@ -4125,7 +4125,11 @@ async function patch_kernel(kbase, kmem, p_ucred, restore_info) {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
   ]);
-  const buf = kpatch900_elf.buffer;
+  const response = await fetch("900.elf");
+  if (!response.ok) {
+    throw new Error(`Failed to load 900.elf: ${response.status}`);
+  }
+  const buf = await response.arrayBuffer();
 //  const patch_elf_loc = './kpatch900.elf';
 //  const buf = await get_patches(patch_elf_loc);
   // FIXME handle .bss segment properly
@@ -5002,14 +5006,6 @@ async function doJBwithPSFreeLapseExploit() {
       close(sd);
     }
     window.log("\nKernel exploit succeeded");
-    await sleep(500); // Wait 500ms
-    // Inject 900.elf payload
-    jb_step_status = await PayloadLoader("900.elf", 1); // Read payload from .elf file
-    if (jb_step_status !== 1) {
-      window.log("Failed to load 900.elf!\nPlease restart console and try again...");
-      return;
-    }
-    window.log("900.elf loaded successfully");
     await sleep(500); // Wait 500ms
     // Inject HEN payload
     jb_step_status = await PayloadLoader("goldhen.bin", 1); // Read payload from .bin file
