@@ -4987,7 +4987,18 @@ async function doJBwithPSFreeLapseExploit() {
     window.log('Lapse STAGE 4/5: Get arbitrary kernel read/write');
     const [kbase, kmem, p_ucred, restore_info] = make_kernel_arw(pktopts_sds, dirty_sd, reqs1_addr, kernel_addr, sds);
     window.log('Lapse STAGE 5/5: Patch kernel');
-    await patch_kernel(kbase, kmem, p_ucred, restore_info);
+    // Check if kernel is already patched by reading ucred caps
+    const cap0 = kmem.read64(p_ucred.add(0x60));
+    const cap1 = kmem.read64(p_ucred.add(0x68));
+    const already_patched = (cap0.low === -1 && cap0.high === -1 && cap1.low === -1 && cap1.high === -1);
+    
+    if (already_patched) {
+      window.log("\nKernel already patched (ucred caps = 0xFFFFFFFFFFFFFFFF), skipping patch...");
+    } else {
+      await patch_kernel(kbase, kmem, p_ucred, restore_info);
+      window.log("\nKernel patches applied");
+    }
+    
     close(unblock_fd);
     close(block_fd);
     free_aios2(groom_ids.addr, groom_ids.length);
