@@ -4942,10 +4942,14 @@ async function doJBwithPSFreeLapseExploit() {
       return;
     }
     await lapse_init();
-    try {   
+    try {
+      //chain.sys('setuid', 0);   
         if (chain.sys('setuid', 0) == 0) {
-            showMessage("GoldHen already loaded !..."),
             window.log("GoldHen already loaded !.");
+            window.log("\nKernel exploit succeeded");
+            window.log("AIO fixes applied");
+            window.log("GoldHen Loaded Successfully !...");
+            showMessage("GoldHen already loaded ! You can now select payloads.");
             load_exploit_done();
             localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
             EndTimer();
