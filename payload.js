@@ -1,44 +1,44 @@
 function load_gta(){
 LoadedMSG="Installer gta5 rdr2 prx Loaded !!!";
-LoadFromGHBLS('payloads/installergta5rdr2prx.bin');
+PayloadLoader('payloads/installergta5rdr2prx.bin');awaitpl();
 }
 
 function load_dumper(){
 LoadedMSG="Dumper v2 Loaded !!!";
-LoadFromGHBLS('payloads/gamedumper.bin');
+PayloadLoader('payloads/gamedumper.bin');awaitpl();
 }
 
 function load_ps4debug(){
 LoadedMSG="PS4Debug v1.0.15  Loaded !!!";
-LoadFromGHBLS('payloads/ps4debug.bin');
+PayloadLoader('payloads/ps4debug.bin');awaitpl();
 }
 
 function load_dbrestore(){
 LoadedMSG="restore DB Loaded !!!";
-LoadFromGHBLS('payloads/restore.bin');
+PayloadLoader('payloads/restore.bin');awaitpl();
 }
 
 function load_dbbackup(){
 LoadedMSG="Backup DB Loaded !!!";
-LoadFromGHBLS('payloads/backup.bin');
+PayloadLoader('payloads/backup.bin');awaitpl();
 }
 
 function load_pkg(){
 LoadedMSG="Backup Pkg v1.1 Loaded!!! Load your game!!!";
-LoadFromGHBLS('payloads/pkgbackup.bin');
+PayloadLoader('payloads/pkgbackup.bin');awaitpl();
 }
 
 function load_disabled_update(){
 LoadedMSG="Disabled Update Loaded!!!";
-LoadFromGHBLS('payloads/disabled_update.bin');
+PayloadLoader('payloads/disabled_update.bin');awaitpl();
 }
 
 function load_enabled_update(){
 LoadedMSG="Enabled Update Loaded!!!";
-LoadFromGHBLS('payloads/enabled_update.bin');
+PayloadLoader('payloads/enabled_update.bin');awaitpl();
 }
 
 function load_fix(){
 LoadedMSG="psfree fix Aio Loaded!!!";
-LoadFromGHBLS('payloads/psfree-fix.bin');
+PayloadLoader('payloads/psfree-fix.bin');awaitpl();
 }

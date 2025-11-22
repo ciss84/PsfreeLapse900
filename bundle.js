@@ -4942,7 +4942,7 @@ async function doJBwithPSFreeLapseExploit() {
       return;
     }
     await lapse_init();
-    /*try {
+    try {
       chain.sys('setuid', 0);
     }
     catch (e) {
@@ -4951,9 +4951,9 @@ async function doJBwithPSFreeLapseExploit() {
     if (localStorage.ExploitLoaded === "yes" && sessionStorage.ExploitLoaded != "yes") {
       runBinLoader();
       return new Promise(() => {}); // In order to keep BinLoader always alive
-    }*/
+    }
     // If setuid is successful, we dont need to run the kexploit again
-    try {
+    /*try {
         if (chain.sys('setuid', 0) == 0) {
             showMessage("GoldHen already loaded !..."),
             window.log("GoldHen already loaded !.");
@@ -4961,7 +4961,7 @@ async function doJBwithPSFreeLapseExploit() {
             return true;
         }
     }
-    catch (e) {}
+    catch (e) {}*/
 
     // if the first thing you do since boot is run the web browser, WebKit can
     // use all the cores
