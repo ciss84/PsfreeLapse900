@@ -1,36 +1,41 @@
-batch@echo off
-echo ================================
-echo  PS4 Jailbreak - Cache Generator
-echo ================================
-echo.
+@echo off
 
-set VERSION=v2.0
-set OUTPUT=ps4cache.appcache
+echo CACHE MANIFEST > test0.txt
+echo #VERSION 1.1 >> test0.txt
+echo. >> test0.txt
+echo CACHE: >> test0.txt
 
-echo Generation du cache manifest...
-echo.
+set LOC=%~dp0
 
-(
-echo CACHE MANIFEST
-echo # PS4 Jailbreak Cache %VERSION%
-echo # Generated: %date% %time%
-echo.
-echo CACHE:
-for %%f in (*.html) do echo %%f
-for %%f in (*.js) do echo %%f
-for %%f in (*.css) do echo %%f
-for %%f in (*.png) do echo %%f
-for %%f in (*.jpg) do echo %%f
-for %%f in (*.bin) do echo %%f
-echo.
-echo NETWORK:
-echo *
-echo.
-echo FALLBACK:
-echo / index.html
-) > %OUTPUT%
+dir /B /S /A:-D >> test0.txt
 
-echo.
-echo Fichier %OUTPUT% cree avec succes!
-echo.
-pause
+echo. >> test0.txt
+echo NETWORK: >> test0.txt
+echo * >> test0.txt
+
+findstr /v "media .bat .exe .mp4 .git .py test0.txt" test0.txt > test.txt
+del test0.txt
+
+@echo off
+setlocal enableextensions disabledelayedexpansion
+set "search=%LOC%"
+set "replace="
+set "textFile=test.txt"
+for /f "delims=" %%i in ('type "%textFile%" ^& break ^> "%textFile%" ') do (
+set "line=%%i"
+setlocal enabledelayedexpansion
+>>"%textFile%" echo(!line:%search%=%replace%!
+endlocal)
+
+setlocal DisableDelayedExpansion
+set "firstLineReady="
+(for /F "eol=$ delims=" %%a in (test.txt) DO (
+if defined firstLineReady (echo()
+set "firstLineReady=1"
+<nul set /p "=%%a")
+) > 84ciss.manifest
+del test.txt
+
+echo 84ciss.manifest created!!
+
+sleep 2
