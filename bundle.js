@@ -5003,44 +5003,13 @@ async function doJBwithPSFreeLapseExploit() {
     }
     window.log("\nKernel exploit succeeded");
     await sleep(500); // Wait 500ms
-    // Load 900.elf using JIT method
-    try {
-      const response = await fetch("900.elf");
-      if (!response.ok) {
-        throw new Error(`Failed to load 900.elf: ${response.status}`);
-      }
-      const buf = await response.arrayBuffer();
-      const patches = new View1(buf, 0x1000);
-      let map_size = patches.size;
-      if (map_size === 0) {
-        throw new Error('900.elf size is zero');
-      }
-      map_size = map_size + page_size & -page_size;
-      
-      const prot_rwx = 7;
-      const prot_rx = 5;
-      const prot_rw = 3;
-      const exec_p = new Int(0, 9);
-      const write_p = new Int(0x10000000, 9);
-      const exec_fd = sysi('jitshm_create', 0, map_size, prot_rwx);
-      const write_fd = sysi('jitshm_alias', exec_fd, prot_rw);
-      
-      const exec_addr = chain.sysp('mmap', exec_p, map_size, prot_rx, MAP_SHARED|MAP_FIXED, exec_fd, 0);
-      const write_addr = chain.sysp('mmap', write_p, map_size, prot_rw, MAP_SHARED|MAP_FIXED, write_fd, 0);
-      
-      if (exec_addr.ne(exec_p) || write_addr.ne(write_p)) {
-        throw new Error('mmap() for 900.elf failed');
-      }
-      
-      sysi('mlock', exec_addr, map_size);
-      mem.cpy(write_addr, patches.addr, patches.size);
-      sys_void('kexec', exec_addr);
-      
-      window.log("900.elf loaded successfully");
-    } catch (e) {
-      window.log("Failed to load 900.elf: " + e.message);
+    // Inject aio_patches payload
+    jb_step_status = await PayloadLoader("aio_patches.bin", 0); // Read payload from Byte array
+    if (jb_step_status !== 1) {
+      window.log("Failed to load AIO fix!\nPlease restart console and try again...");
       return;
     }
+    window.log("AIO fixes applied");
     await sleep(500); // Wait 500ms
     // Inject HEN payload
     jb_step_status = await PayloadLoader("goldhen.bin", 1); // Read payload from .bin file
