@@ -34,9 +34,10 @@ button:hover {
 	</style>
     <title>PS4 Jailbreak Auto GoldHen v2.0(Psfree & Lapse 9.00)</title>
     <script>
-      if ((window.applicationCache.status == '0') || (window.applicationCache.status == '3')) { // 0: UNCACHED, 3: IDLE
-        window.location.replace("cache.html");
-      }
+        if (window.applicationCache.status=='0')
+        {
+          window.location.replace("cache.html");
+        }
     </script>
     <script>
         function showMessage(msg) {
