@@ -4941,22 +4941,21 @@ async function doJBwithPSFreeLapseExploit() {
       window.log("Global variables not properly initialized. Please restart console and try again...");
       return;
     }
-    await lapse_init();
-    try {
-      //chain.sys('setuid', 0);   
-        if (chain.sys('setuid', 0) == 0) {
-            window.log("GoldHen already loaded !.");
-            window.log("\nKernel exploit succeeded");
-            window.log("AIO fixes applied");
-            window.log("GoldHen Loaded Successfully !...");
-            showMessage("GoldHen already loaded ! You can now select payloads.");
-            load_exploit_done();
-            localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
-            EndTimer();
-            return;
-        }
+    
+    // Check if exploit was already loaded in this session
+    if (localStorage.ExploitLoaded === "yes" || sessionStorage.ExploitLoaded === "yes") {
+      window.log("GoldHen already loaded in this session !.");
+      window.log("\nKernel exploit succeeded");
+      window.log("AIO fixes applied");
+      window.log("GoldHen Loaded Successfully !...");
+      showMessage("GoldHen already loaded ! You can now select payloads.");
+      load_exploit_done();
+      localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
+      EndTimer();
+      return;
     }
-    catch (e) {}
+    
+    await lapse_init();
 
     // if the first thing you do since boot is run the web browser, WebKit can
     // use all the cores
