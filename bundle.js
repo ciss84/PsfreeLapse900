@@ -5008,7 +5008,7 @@ async function doJBwithPSFreeLapseExploit() {
     window.log("\nKernel exploit succeeded");
     await sleep(500); // Wait 500ms
     // Inject HEN payload
-    jb_step_status = await PayloadLoader("goldhen.bin", 1); // Read payload from .bin file
+    jb_step_status = await PayloadLoader("", 1); // Read payload from .bin file
     if (jb_step_status !== 1) {
       window.log("Failed to load HEN!\nPlease restart console and try again...");
       localStorage.failcount = ++localStorage.failcount;window.failCounter.innerHTML=localStorage.failcount;
