@@ -4947,7 +4947,6 @@ async function doJBwithPSFreeLapseExploit() {
         if (chain.sys('setuid', 0) == 0) {
             showMessage("GoldHen already loaded !..."),
             window.log("GoldHen already loaded !.");
-            done_exploit();
             return true;
         }
     }
