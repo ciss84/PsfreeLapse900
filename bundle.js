@@ -4943,7 +4943,13 @@ async function doJBwithPSFreeLapseExploit() {
     }
     await lapse_init();
     try {
-      chain.sys('setuid', 0);
+      //chain.sys('setuid', 0);   
+        if (chain.sys('setuid', 0) == 0) {
+            showMessage("GoldHen already loaded !..."),
+            window.log("GoldHen already loaded !.");
+            done_exploit();
+            return true;
+        }
     }
     catch (e) {}
 
