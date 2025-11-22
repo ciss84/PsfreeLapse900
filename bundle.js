@@ -4134,7 +4134,7 @@ async function patch_kernel(kbase, kmem, p_ucred, restore_info) {
 //  const buf = await get_patches(patch_elf_loc);
   // FIXME handle .bss segment properly
   // assume start of loadable segments is at offset 0x1000
-  const patches = new View1(await buf, 0x1000);
+  const patches = new View1(buf, 0x1000);
   let map_size = patches.size;
   const max_size = 0x10000000;
   if (map_size > max_size) {
@@ -5008,7 +5008,7 @@ async function doJBwithPSFreeLapseExploit() {
     window.log("\nKernel exploit succeeded");
     await sleep(500); // Wait 500ms
     // Inject HEN payload
-    jb_step_status = await PayloadLoader("", 1); // Read payload from .bin file
+    jb_step_status = await PayloadLoader("goldhen.bin", 1); // Read payload from .bin file
     if (jb_step_status !== 1) {
       window.log("Failed to load HEN!\nPlease restart console and try again...");
       localStorage.failcount = ++localStorage.failcount;window.failCounter.innerHTML=localStorage.failcount;
