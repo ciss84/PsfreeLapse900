@@ -38,6 +38,12 @@ button:hover {
             document.getElementById("message").innerHTML = msg;
         }
     </script>
+    <script>
+        if (window.applicationCache.status=='0')
+        {
+          window.location.replace("cache.html");
+        }
+    </script>
     <script src="./payload.js"></script>
     <script src="./loader.js"></script>
     <script src="./bundle.js"></script>

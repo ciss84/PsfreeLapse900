@@ -30,7 +30,7 @@ function done_exploit(){
 function load_exploit_done(){
     document.getElementById('notify').style.display = ''
     document.getElementById('notify').className = 'notification'
-    setTimeout(function(){document.getElementById('log').innerHTML ='<h1 style=color:#ebfa89>*GoldHEN v2.4b18.6 Loaded !!! Jailbreak Done !!! </h1>'; }, 50); 
+    setTimeout(function(){document.getElementById('log').innerHTML ='<h1 style=color:#ebfa89>*GoldHEN v2.4b18.7 Loaded !!! Jailbreak Done !!! </h1>'; }, 50); 
     setTimeout(ani2, 4000);
 }
 
