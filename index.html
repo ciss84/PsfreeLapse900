@@ -3,8 +3,8 @@
     <meta charset="utf-8">
     <title>PS4 Jailbreak</title>
     <script>
-        // Si pas encore en cache, rediriger vers cache.html
-        if (window.applicationCache.status == 0) {
+        // Si pas en cache (UNCACHED=0) ou en train de télécharger (DOWNLOADING=3), rediriger vers cache.html
+        if ((window.applicationCache.status == 0) || (window.applicationCache.status == 3)) {
             window.location.replace("cache.html");
         }
     </script>

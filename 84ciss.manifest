@@ -1,7 +1,7 @@
-CACHE MANIFEST 
-#VERSION 1.2 
+CACHE MANIFEST
+#VERSION 1.3
 
-CACHE: 
+CACHE:
 1.jpg
 2.jpg
 3.jpg
@@ -29,5 +29,5 @@ payloads/pkgbackup.bin
 payloads/ps4debug.bin
 payloads/restore.bin
 
-NETWORK: 
-* 
+NETWORK:
+*
