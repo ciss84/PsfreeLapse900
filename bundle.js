@@ -4943,14 +4943,19 @@ async function doJBwithPSFreeLapseExploit() {
     }
     await lapse_init();
     try {
-        if (chain.sys('setuid', 0) == 0) {
-            showMessage("GoldHen already loaded !..."),
-            window.log("GoldHen already loaded !.");
-            done_exploit();
-            return true;
-        }
+      chain.sys('setuid', 0);
+      // If setuid succeeds, exploit is already loaded
+      if (localStorage.ExploitLoaded === "yes") {
+        sessionStorage.ExploitLoaded = "yes";
+        window.log("Exploit already loaded, skipping...");
+        return new Promise(() => {}); // Keep BinLoader alive
+      }
     }
-    catch (e) {}
+    catch (e) {
+      // setuid failed, need to run exploit
+      localStorage.ExploitLoaded = "no";
+      sessionStorage.removeItem('ExploitLoaded');
+    }
 
     // if the first thing you do since boot is run the web browser, WebKit can
     // use all the cores
@@ -5021,13 +5026,17 @@ async function doJBwithPSFreeLapseExploit() {
     jb_step_status = await PayloadLoader("goldhen.bin", 1); // Read payload from .bin file
     if (jb_step_status !== 1) {
       window.log("Failed to load HEN!\nPlease restart console and try again...");
-      localStorage.failcount = ++localStorage.failcount;window.failCounter.innerHTML=localStorage.failcount;
+      localStorage.failcount = parseInt(localStorage.failcount || 0) + 1;
+      var failEl = document.getElementById('failCounter');
+      if (failEl) failEl.innerHTML = localStorage.failcount;
       return;
     }
     showMessage("GoldHen Loaded Successfully !..."),
     window.log("GoldHen Loaded Successfully !...");
     load_exploit_done();
-    localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
+    localStorage.passcount = parseInt(localStorage.passcount || 0) + 1;
+    var passEl = document.getElementById('passCounter');
+    if (passEl) passEl.innerHTML = localStorage.passcount;
     EndTimer();   
   } catch (error) {
     window.log("An error occured during Lapse\nPlease restart console and try again...\nError definition: " + error);
