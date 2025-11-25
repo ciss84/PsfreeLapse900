@@ -2,12 +2,6 @@
   <head>
     <meta charset="utf-8">
     <title>PS4 Jailbreak</title>
-    <script>
-        // SIMPLE ET EFFICACE - Vérifier si pas en cache
-        if (window.applicationCache.status == '0') {
-            window.location.replace("cache.html");
-        }
-    </script>
 <link rel="stylesheet prefetch" href="Style.css">
 	<style>
 		body{background-image: url('');background-color:#111112;background-attachment:fixed;background-size:100%;background-repeat:no-repeat;font-family:system-ui;text-align:center}button:-moz-focus-inner, button:focus{outline:0;border:none}button{font-family:arial;font-size:20px;text-transform:uppercase;font-weight:700;border:2px solid #404040;border-radius:4px;padding:10px;cursor:pointer;display:inline-block;text-decoration:none;background:0 0;color:#d4d7d8;box-shadow:0 5px 0 #878787} button:hover{font-size:20px;background:#032140;border:2px solid #fff;box-shadow:0 5px 0 #ccc;color:#fff} button:active{background:#ee596f;position:relative;color:#000;top:5px;box-shadow:none}
@@ -42,6 +36,11 @@ button:hover {
     <script>
         function showMessage(msg) {
             document.getElementById("message").innerHTML = msg;
+        }
+    </script>
+    <script>
+        if (window.applicationCache.status == '0') {
+            window.location.replace("cache.html");
         }
     </script>
     <script src="./payload.js"></script>
@@ -117,30 +116,6 @@ button:hover {
     </script>
   </body>
   <script>
-    // ATTENDRE que load_exploit soit disponible avant de continuer
-    function waitForJailbreak() {
-        if (typeof load_exploit !== 'function') {
-            console.log('[JB] Waiting for load_exploit to be defined...');
-            setTimeout(waitForJailbreak, 100);
-            return;
-        }
-        console.log('[JB] load_exploit is ready!');
-    }
-    
-    // Vérifier au démarrage
-    if (localStorage.getItem("ps4_cached")) {
-        waitForJailbreak();
-    }
-    
-    // DÉTECTION MISE À JOUR - Redirection vers cache.html
-    if (window.applicationCache) {
-        window.applicationCache.addEventListener('downloading', function(e) {
-            console.log('[Cache] Update downloading - Redirect to cache.html');
-            localStorage.removeItem("ps4_cached");
-            window.location.replace("cache.html");
-        }, false);
-    }
-    
     // Logging utility
     const outputConsole = document.getElementById("console");
     window.log = (msg) => { outputConsole.textContent += msg + "\n"; };

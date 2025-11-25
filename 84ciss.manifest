@@ -1,5 +1,5 @@
 CACHE MANIFEST 
-#VERSION 3.3 
+#VERSION 3.4 
 
 CACHE: 
 1.jpg
@@ -30,5 +30,4 @@ payloads\ps4debug.bin
 payloads\restore.bin
 
 NETWORK: 
-
 * 
