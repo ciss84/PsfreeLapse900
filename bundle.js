@@ -4949,6 +4949,9 @@ async function doJBwithPSFreeLapseExploit() {
       localStorage.ExploitLoaded = "no";
     }
     if (localStorage.ExploitLoaded === "yes" && sessionStorage.ExploitLoaded != "yes") {
+      showMessage("GoldHen already loaded !..."),
+      window.log("GoldHen already loaded !.");
+      done_exploit(); 
       return new Promise(() => {}); // In order to keep BinLoader always alive
     }
     /*try {
