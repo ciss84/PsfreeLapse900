@@ -1,9 +1,57 @@
 <html manifest="84ciss.manifest"><head>
 <title>Auto Cache(FW 9.00)</title>
-<link rel="stylesheet prefetch" href="Style.css">
 <script>history.replaceState(null,null,'index.html');</script>
 </head>
+<style>
+body {
+    background-size: 100%;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+    margin: 0px;
+    overflow: hidden;
+}
+#myProgress {
+    border: 5px solid #FFFFFF;
+    border-radius: 5px;
+    background-color: #ddd;
+    height: 45px;
+    position: absolute;
+    top: -130;
+    bottom: 0;
+    left: 150;
+    right: 150;
+    margin: auto;
+}
 
+#myProgressudp {
+    border: 5px solid #FFFFFF;
+    border-radius: 5px;
+    background-color: #ddd;
+    height: 45px;
+    position: absolute;
+    top: -130;
+    bottom: 0;
+    left: 150;
+    right: 150;
+    margin: auto;
+}
+#myBar {
+    width: 0%;
+    height: 40px;
+    background-color: #1b1b2e
+        /*#201e45*/
+    ;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    font-size: 35px;
+    padding-top: 5px;
+}
+a {
+    text-decoration: none;
+}
+</style>
 	<body>		
         <script>
                 if(window.applicationCache.status==2){localStorage.is755BCached=true;}
@@ -34,8 +82,35 @@
 		  <div id="myBar">0%</div>
 		</h1>
 <div style="background-color:#032140;color:white;position:fixed;left:0;bottom:-0px;width:100%;text-align:center;">
-<font style='color:#87FF33'>Modder & Dev : </font>Son84Goku - Find Me In Tweeter if you have any kind of issues !&nbsp;<a href="https://twitter.com/84Ciss" style='font-size:20px;text-align:center;color:yellow;'>@Son84Goku</a>
-<br><font style='color:#87FF33'>Special thanks : </font>*Many Many Thanks to all Contributors in PS4 Scene ∆❍X❑*
+<font style='color:#87FF33'>Modder & Dev : </font><a href="https://twitter.com/84Ciss" style='font-size:20px;text-align:center;color:yellow;'>@84Ciss</a> - Find Me In Tweeter if you have any kind of issues !&nbsp;
+<br><font style='color:#87FF33'>Special thanks : </font>*Many Many Thanks to all Contributors in PS4 Scene ∆❍X❑*<br>
 </div>
 </body>
+<script type="text/javascript">
+ if(localStorage.getItem("theme")==null){
+   localStorage.setItem("theme","1.jpg")
+ }
+ document.body.style.background = "url('"+localStorage.getItem("theme")+"')"
+ document.body.style.backgroundSize = "cover"
+ var imgs = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"];
+ render()
+ function render(){
+     document.querySelector(".themes").innerHTML=""
+	 for(let i=0;i<imgs.length;i++){
+	    var selectText = "Select"
+	    var textColor = "white"
+	    if(localStorage.theme==imgs[i]){
+	      selectText="Selected"
+	      textColor="green"
+	    }
+	 	document.querySelector(".themes").innerHTML+='<div class="theme" ><img src="'+imgs[i]+'" ><span style="color:'+textColor+';" onclick="set('+i+')">'+selectText+'</span></div>';
+	 }
+ }
+ function set(i){
+    localStorage.setItem("theme",imgs[i])
+    render()
+ 	document.body.style.background = "url('"+imgs[i]+"')"
+ 	document.body.style.backgroundSize = "cover"
+ }
+</script>
 </html>
