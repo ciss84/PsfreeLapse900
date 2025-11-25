@@ -4943,15 +4943,6 @@ async function doJBwithPSFreeLapseExploit() {
     }
     await lapse_init();
     try {
-        if (chain.sys('setuid', 0) == 0) {
-            showMessage("GoldHen already loaded !..."),
-            window.log("GoldHen already loaded !.");
-            done_exploit();
-            return true;
-        }
-    }
-    catch (e) {}    
-    /*try {
       chain.sys('setuid', 0);
       // If setuid succeeds, exploit is already loaded
       if (localStorage.ExploitLoaded === "yes") {
@@ -4964,7 +4955,7 @@ async function doJBwithPSFreeLapseExploit() {
       // setuid failed, need to run exploit
       localStorage.ExploitLoaded = "no";
       sessionStorage.removeItem('ExploitLoaded');
-    }*/
+    }
 
     // if the first thing you do since boot is run the web browser, WebKit can
     // use all the cores

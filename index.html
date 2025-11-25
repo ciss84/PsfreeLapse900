@@ -39,9 +39,7 @@ body {
 #myBar {
     width: 0%;
     height: 40px;
-    background-color: #1b1b2e
-        /*#201e45*/
-    ;
+    background-color: #1b1b2e;
     text-align: center;
     line-height: 30px;
     color: white;
@@ -57,8 +55,8 @@ a {
                 if(window.applicationCache.status==2){localStorage.is755BCached=true;}
         	window.applicationCache.ondownloading=function(){document.getElementById("progress").innerHTML="Page Caching Started!!";localStorage.is755BCached=false;};
 		window.applicationCache.onprogress=function(a){document.getElementById("myBar").style.width=(Math.round(100*(a.loaded/a.total)))+"%";document.getElementById("myBar").innerHTML=(Math.round(100*(a.loaded/a.total)))+"%";};
-		window.applicationCache.oncached=function(){document.getElementById("progress").innerHTML="Page Cached Successfully!!";localStorage.is755BCached=true;setTimeout(function(){window.location.reload("myBar"); }, 1500);};
-                window.applicationCache.onupdateready=function(){document.getElementById("progress").innerHTML="Update Cache Successfully!!";localStorage.is755BCached=true;setTimeout(function(){window.location.reload("myBar"); }, 1500);};
+		window.applicationCache.oncached=function(){document.getElementById("progress").innerHTML="Page Cached Successfully!!";localStorage.is755BCached=true;setTimeout(function(){window.location.replace("lndex.html"); }, 1500);};
+                window.applicationCache.onupdateready=function(){document.getElementById("progress").innerHTML="Update Cache Successfully!!";localStorage.is755BCached=true;setTimeout(function(){window.location.replace("lndex.html"); }, 1500);};
         	window.applicationCache.onnoupdate=function(){window.location.replace("lndex.html");};
         	window.applicationCache.onerror=function(){window.location.replace("lndex.html");};
         </script>
@@ -83,7 +81,7 @@ a {
 		</h1>
 <div style="background-color:#032140;color:white;position:fixed;left:0;bottom:-0px;width:100%;text-align:center;">
 <font style='color:#87FF33'>Modder & Dev : </font><a href="https://twitter.com/84Ciss" style='font-size:20px;text-align:center;color:yellow;'>@84Ciss</a> - Find Me In Tweeter if you have any kind of issues !&nbsp;
-<br><font style='color:#87FF33'>Special thanks : </font>*Many Many Thanks to all Contributors in PS4 Scene ∆❍X❑*<br>
+<br><font style='color:#87FF33'>Special thanks : </font>*Many Many Thanks to all Contributors in PS4 Scene △○×□*<br>
 </div>
 </body>
 <script type="text/javascript">

@@ -2,6 +2,10 @@
   <head>
     <meta charset="utf-8">
     <title>PS4 Jailbreak</title>
+    <script>
+        // Reset sessionStorage pour éviter le blocage de l'exploit
+        sessionStorage.removeItem('ExploitLoaded');
+    </script>
     <link rel="stylesheet prefetch" href="Style.css">
     <style>
 		body{background-image: url('');background-color:#111112;background-attachment:fixed;background-size:100%;background-repeat:no-repeat;font-family:system-ui;text-align:center}button:-moz-focus-inner, button:focus{outline:0;border:none}button{font-family:arial;font-size:20px;text-transform:uppercase;font-weight:700;border:2px solid #404040;border-radius:4px;padding:10px;cursor:pointer;display:inline-block;text-decoration:none;background:0 0;color:#d4d7d8;box-shadow:0 5px 0 #878787} button:hover{font-size:20px;background:#032140;border:2px solid #fff;box-shadow:0 5px 0 #ccc;color:#fff} button:active{background:#ee596f;position:relative;color:#000;top:5px;box-shadow:none}
@@ -65,7 +69,7 @@ button:hover {
     <button style='margin-top:10px;font-size:15px;text-align:center;color:#FFFFFF' class="pointer" onclick=load_pkg() onMouseOver="msgs2.innerHTML='Backup Pkg to Usb drive to Reinstall in case of problems'" ; onmouseout="msgs2.innerHTML='△○×□'" type="button"><B> Pkg Backup </B></button></a>
     <button style='font-size:15px;text-align:center;color:#FFFFFF' class="pointer" onclick=load_dumper() onMouseOver="msgs2.innerHTML='Dump Games to a USB drive to be able to create fpkg files'" ; onmouseout="msgs2.innerHTML='△○×□'" type="button"><B> Game Dumper </B></button></a>
     <button style='font-size:15px;text-align:center;color:#FFFFFF' class="pointer" onclick=load_ps4debug() onMouseOver="msgs2.innerHTML='Enable Ps4 Debuger'" ; onmouseout="msgs2.innerHTML='△○×□'" type="button"><B> Ps4debug </B></button></a>
-    <button style='font-size:15px;text-align:center;color:#FF6B6B' class="pointer" onclick="localStorage.clear();sessionStorage.clear();location.reload();" onMouseOver="msgs2.innerHTML='Reset All Cache & Counters'" ; onmouseout="msgs2.innerHTML='△○×□'" type="button"><B> Reset Cache </B></button></a>
+    <button style='font-size:15px;text-align:center;color:#FF6B6B' class="pointer" onclick="localStorage.clear();sessionStorage.clear();location.replace('index.html');" onMouseOver="msgs2.innerHTML='Reset All Cache & Counters'" ; onmouseout="msgs2.innerHTML='△○×□'" type="button"><B> Reset Cache </B></button></a>
     <br><br><br>
     <div style="background-color:#032140;color:white;position:fixed;left:0;bottom:-0px;width:100%;text-align:center;">
     <a href="theme.html" rel="noopener noreferrer"><button style='font-size:15px;text-align:center;color:#ffffff' class="pointer" onMouseOver="msgs2.innerHTML='Change Background'" ; onmouseout="msgs2.innerHTML='△○×□'" type="button"><B> Theme Selector </B></button></a>&nbsp
@@ -100,14 +104,19 @@ button:hover {
  }
 </script>
  <script>
-        if (localStorage.passcount == null || localStorage.passcount == undefined) localStorage.passcount = 0;
-        if (localStorage.passCounter == null || localStorage.passCounter == undefined) {
-          passCounter.innerHTML = localStorage.passcount;
+        // Initialize localStorage counters properly
+        if (localStorage.passcount == null || localStorage.passcount == undefined) {
+            localStorage.passcount = 0;
         }
-        if (localStorage.failcount == null || localStorage.failcount == undefined) localStorage.failcount = 0;
-        if (localStorage.failCounter == null || localStorage.failCounter == undefined) {
-          failCounter.innerHTML = localStorage.failcount;
+        if (localStorage.failcount == null || localStorage.failcount == undefined) {
+            localStorage.failcount = 0;
         }
+        
+        // Update display when page loads
+        var passEl = document.getElementById('passCounter');
+        var failEl = document.getElementById('failCounter');
+        if (passEl) passEl.innerHTML = localStorage.passcount;
+        if (failEl) failEl.innerHTML = localStorage.failcount;
     </script>
   </body>
 </html>
