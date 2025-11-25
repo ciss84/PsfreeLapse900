@@ -1,96 +1,84 @@
-<html manifest="84ciss.manifest"><head>
-<title>Auto Cache(FW 9.00)</title>
-<script>history.replaceState(null,null,'index.html');</script>
-</head>
-<style>
-body {
-    background-size: 100%;
-    background-repeat: no-repeat;
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>PS4 Jailbreak</title>
+<link rel="stylesheet prefetch" href="Style.css">
+	<style>
+		body{background-image: url('');background-color:#111112;background-attachment:fixed;background-size:100%;background-repeat:no-repeat;font-family:system-ui;text-align:center}button:-moz-focus-inner, button:focus{outline:0;border:none}button{font-family:arial;font-size:20px;text-transform:uppercase;font-weight:700;border:2px solid #404040;border-radius:4px;padding:10px;cursor:pointer;display:inline-block;text-decoration:none;background:0 0;color:#d4d7d8;box-shadow:0 5px 0 #878787} button:hover{font-size:20px;background:#032140;border:2px solid #fff;box-shadow:0 5px 0 #ccc;color:#fff} button:active{background:#ee596f;position:relative;color:#000;top:5px;box-shadow:none}
+button {
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 20px 0 white;
+    border: 2px solid black;
+    border-radius: 100px 10px / 120px;
     color: white;
+    text-decoration: none;
+    width: 180px;
+    height: 40px;
+    display: inline-table;
+    font-family: system-ui;
     text-align: center;
-    margin: 0px;
-    overflow: hidden;
-}
-#myProgress {
-    border: 5px solid #FFFFFF;
-    border-radius: 5px;
-    background-color: #ddd;
-    height: 45px;
-    position: absolute;
-    top: -130;
-    bottom: 0;
-    left: 150;
-    right: 150;
-    margin: auto;
+    text-transform: none;
 }
 
-#myProgressudp {
-    border: 5px solid #FFFFFF;
-    border-radius: 5px;
-    background-color: #ddd;
-    height: 45px;
-    position: absolute;
-    top: -130;
-    bottom: 0;
-    left: 150;
-    right: 150;
-    margin: auto;
+button:focus,
+button:hover {
+    color: White;
+    box-shadow: 0 5px 50px 0 white;
+    background-color: #032140;
+    border-radius: 100px 10px / 120px;
 }
-#myBar {
-    width: 0%;
-    height: 40px;
-    background-color: #1b1b2e;
-    text-align: center;
-    line-height: 30px;
-    color: white;
-    font-size: 35px;
-    padding-top: 5px;
-}
-a {
-    text-decoration: none;
-}
-</style>
-	<body>		
-        <script>
-                if(window.applicationCache.status==2){localStorage.is755BCached=true;}
-        	window.applicationCache.ondownloading=function(){document.getElementById("progress").innerHTML="Page Caching Started!!";localStorage.is755BCached=false;};
-		window.applicationCache.onprogress=function(a){document.getElementById("myBar").style.width=(Math.round(100*(a.loaded/a.total)))+"%";document.getElementById("myBar").innerHTML=(Math.round(100*(a.loaded/a.total)))+"%";};
-		window.applicationCache.oncached=function(){document.getElementById("progress").innerHTML="Page Cached Successfully!!";localStorage.is755BCached=true;setTimeout(function(){window.location.replace("lndex.html"); }, 1500);};
-                window.applicationCache.onupdateready=function(){document.getElementById("progress").innerHTML="Update Cache Successfully!!";localStorage.is755BCached=true;setTimeout(function(){window.location.replace("lndex.html"); }, 1500);};
-        	window.applicationCache.onnoupdate=function(){window.location.replace("lndex.html");};
-        	window.applicationCache.onerror=function(){window.location.replace("lndex.html");};
-        </script>
-			<script>
-			var width = 0;
-			function frame1() {
-				var elem = document.getElementById("myBar");
-				var i=0;
-				var id = setInterval(fra, 10);
-				function fra(){
-				  if(i<10 && width<100){
-					  width++;
-					  elem.style.width = width + "%";
-					  elem.innerHTML = width  + "%";
-				  } i++;
-				}
-			}
-		</script>	
-		<h1 id="progress" class="titlehead">Loading.. Please Wait !!</h1><hr><br>
-		<h1 id="myProgress">
-		  <div id="myBar">0%</div>
-		</h1>
-<div style="background-color:#032140;color:white;position:fixed;left:0;bottom:-0px;width:100%;text-align:center;">
-<font style='color:#87FF33'>Modder & Dev : </font><a href="https://twitter.com/84Ciss" style='font-size:20px;text-align:center;color:yellow;'>@84Ciss</a> - Find Me In Tweeter if you have any kind of issues !&nbsp;
-<br><font style='color:#87FF33'>Special thanks : </font>*Many Many Thanks to all Contributors in PS4 Scene △○×□*<br>
+
+            #console {
+                font-family: 'logging';
+            }
+	</style>
+    <title>PS4 Jailbreak Auto GoldHen v2.0(Psfree & Lapse 9.00)</title>
+    <script>
+        function showMessage(msg) {
+            document.getElementById("message").innerHTML = msg;
+        }
+    </script>
+    <script src="./payload.js"></script>
+    <script src="./loader.js"></script>
+    <script src="./bundle.js"></script>
+  </head>
+<body onload=load_exploit()>
+<div id="jb-progress">
+    <div id="notify"  style="display:;">
+        <img src="hen.png" alt="" width="100px" height="100px">
+        <p id="log"></p>
+    </div>
+    <br><h1><center><font style='color:#fff;font-size:46px;font-weight:bold;margin:0 0 0 0.0;text-shadow:3px 2px #3d3939;'><i>PS4 Jailbreak v2.0 (Fw 9.00)</i></font></center></h1>
+    <div>
+    <center><font style='color:#fff;font-size:26px;font-weight:bold;margin:0 0 0 0.0;text-shadow:3px 2px #3d3939;'><i>Auto GoldHen</i></font></center>
+    </div>
+    <br><br><br><br><br><br><br><br>
+    <div id="message" style='color:#fff;font-size:35px;font-weight:bold;margin:0 0 0 0.0;text-shadow:3px 2px #3d3939;'>Jailbreaking. Please, <font color="#ee596f">WAIT!!!</font></div>
+    <br><br><br><br><br><br><br>
+    <h1 id=msgs2 style='font-size:25px;text-align:center;color:#e5e4e2;'>∆❍X❑</h1>
+    <button style='font-size:15px;text-align:center;color:#FFFFFF' class="pointer" onclick=load_gta() onMouseOver="msgs2.innerHTML='Installing the prx and plugins.ini for gta 5 and rdr 2 with a usb key (requires the goldhen plugin loader activated for use !!)'" ; onmouseout="msgs2.innerHTML='∆❍X❑'" type="button"><B> Prx Usb Installer </B></button></a>
+    <button style='font-size:15px;text-align:center;color:#FFFFFF' class="pointer" onclick=load_dbbackup() onMouseOver="msgs2.innerHTML='Dump the database onto a USB flash drive to restore in case of problems'" ; onmouseout="msgs2.innerHTML='∆❍X❑'" type="button"><B> DB Backup </B></button></a>
+    <button style='font-size:15px;text-align:center;color:#FFFFFF' class="pointer" onclick=load_dbrestore() onMouseOver="msgs2.innerHTML='Restore the database with a USB flash drive'" ; onmouseout="msgs2.innerHTML='∆❍X❑'" type="button"><B> DB Restore </B></button></a>
+    <button style='font-size:15px;text-align:center;color:#FFFFFF' class="pointer" onclick=load_disabled_update() onMouseOver="msgs2.innerHTML='Block The Firmware Update'" ; onmouseout="msgs2.innerHTML='∆❍X❑'" type="button"><B> Disabled Update </B></button></a>
+    <button style='font-size:15px;text-align:center;color:#FFFFFF' class="pointer" onclick=load_enabled_update() onMouseOver="msgs2.innerHTML='UnBlock The Firmware Update'" ; onmouseout="msgs2.innerHTML='∆❍X❑'" type="button"><B> Enabled Update </B></button></a>
+    <br>
+    <button style='margin-top:10px;font-size:15px;text-align:center;color:#FFFFFF' class="pointer" onclick=load_pkg() onMouseOver="msgs2.innerHTML='Backup Pkg to Usb drive to Reinstall in case of problems'" ; onmouseout="msgs2.innerHTML='∆❍X❑'" type="button"><B> Pkg Backup </B></button></a>
+    <button style='font-size:15px;text-align:center;color:#FFFFFF' class="pointer" onclick=load_dumper() onMouseOver="msgs2.innerHTML='Dump Games to a USB drive to be able to create fpkg files'" ; onmouseout="msgs2.innerHTML='∆❍X❑'" type="button"><B> Game Dumper </B></button></a>
+    <button style='font-size:15px;text-align:center;color:#FFFFFF' class="pointer" onclick=load_ps4debug() onMouseOver="msgs2.innerHTML='Enable Ps4 Debuger'" ; onmouseout="msgs2.innerHTML='∆❍X❑'" type="button"><B> Ps4debug </B></button></a>
+    <br><br><br>
+    <div style="background-color:#032140;color:white;position:fixed;left:0;bottom:-0px;width:100%;text-align:center;">
+    <a href="theme.html" rel="noopener noreferrer"><button style='font-size:15px;text-align:center;color:#ffffff' class="pointer" onMouseOver="msgs2.innerHTML='Change Background'" ; onmouseout="msgs2.innerHTML='∆❍X❑'" type="button"><B> Theme Selector </B></button></a>&nbsp
+    <font style='color:#87FF33'>Modder & Dev : </font><a href="https://twitter.com/84Ciss" style='font-size:20px;text-align:center;color:yellow;'>@84Ciss</a> - Find Me In Tweeter if you have any kind of issues !&nbsp;<font style="font-size: 20px";style='color:#87FF33'>Pass = <span style="color:green" id=passCounter></span>&nbsp;&nbsp;:&nbsp;&nbsp;Fail = <span style="color:red" id=failCounter></span></font>
+    <br>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<font style='color:#87FF33'>Special thanks : </font>*Many Many Thanks to all Contributors in PS4 Scene ∆❍X❑*<br>
 </div>
-</body>
+<div id='console'></div>
 <script type="text/javascript">
  if(localStorage.getItem("theme")==null){
-   localStorage.setItem("theme","1.jpg")
+   localStorage.setItem("theme","2.jpg")
  }
  document.body.style.background = "url('"+localStorage.getItem("theme")+"')"
  document.body.style.backgroundSize = "cover"
- var imgs = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"];
+ var imgs = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg"];
  render()
  function render(){
      document.querySelector(".themes").innerHTML=""
@@ -111,4 +99,40 @@ a {
  	document.body.style.backgroundSize = "cover"
  }
 </script>
+    <script>
+        if (localStorage.passcount == null || localStorage.passcount == undefined) localStorage.passcount = 0;
+        if (localStorage.passCounter == null || localStorage.passCounter == undefined) {
+          passCounter.innerHTML = localStorage.passcount;
+        }
+        if (localStorage.failcount == null || localStorage.failcount == undefined) localStorage.failcount = 0;
+        if (localStorage.failCounter == null || localStorage.failCounter == undefined) {
+          failCounter.innerHTML = localStorage.failcount;
+        }
+    </script>
+  </body>
+  <script>
+    // Logging utility
+    const outputConsole = document.getElementById("console");
+    window.log = (msg) => { outputConsole.textContent += msg + "\n"; };
+    // Event definitions
+    addEventListener('unhandledrejection', event => {
+      const reason = event.reason;
+      alert(
+        'Unhandled rejection\n'
+        + `${reason}\n`
+        + `${reason.sourceURL}:${reason.line}:${reason.column}\n`
+        + `${reason.stack}`
+      );
+    });
+    addEventListener('error', event => {
+      const reason = event.error;
+      alert(
+        'Unhandled error\n'
+        + `${reason}\n`
+        + `${reason.sourceURL}:${reason.line}:${reason.column}\n`
+        + `${reason.stack}`
+      );
+      return true; // Used for not to show error message on console
+    });
+  </script>
 </html>
