@@ -1,6 +1,7 @@
-<!DOCTYPE html>
 <html manifest="84ciss.manifest">
-<head>
+  <head>
+    <meta charset="utf-8">
+    <title>PS4 Jailbreak</title>
 <link rel="stylesheet prefetch" href="Style.css">
 	<style>
 		body{background-image: url('');background-color:#111112;background-attachment:fixed;background-size:100%;background-repeat:no-repeat;font-family:system-ui;text-align:center}button:-moz-focus-inner, button:focus{outline:0;border:none}button{font-family:arial;font-size:20px;text-transform:uppercase;font-weight:700;border:2px solid #404040;border-radius:4px;padding:10px;cursor:pointer;display:inline-block;text-decoration:none;background:0 0;color:#d4d7d8;box-shadow:0 5px 0 #878787} button:hover{font-size:20px;background:#032140;border:2px solid #fff;box-shadow:0 5px 0 #ccc;color:#fff} button:active{background:#ee596f;position:relative;color:#000;top:5px;box-shadow:none}
@@ -46,7 +47,7 @@ button:hover {
     <script src="./payload.js"></script>
     <script src="./loader.js"></script>
     <script src="./bundle.js"></script>
-</head>
+  </head>
 <body onload=load_exploit()>
 <div id="jb-progress">
     <div id="notify"  style="display:;">
@@ -114,9 +115,9 @@ button:hover {
           failCounter.innerHTML = localStorage.failcount;
         }
     </script>
-</body>
-<script>
-    // DÉTECTION MISE À JOUR - Redirection vers cache.html (COMME PS5)
+  </body>
+  <script>
+    // DÉTECTION MISE À JOUR - Redirection vers cache.html
     if (window.applicationCache) {
         window.applicationCache.addEventListener('downloading', function(e) {
             console.log('[Cache] Update downloading - Redirect to cache.html');
@@ -124,5 +125,29 @@ button:hover {
             window.location.replace("cache.html");
         }, false);
     }
-</script>
+    
+    // Logging utility
+    const outputConsole = document.getElementById("console");
+    window.log = (msg) => { outputConsole.textContent += msg + "\n"; };
+    // Event definitions
+    addEventListener('unhandledrejection', event => {
+      const reason = event.reason;
+      alert(
+        'Unhandled rejection\n'
+        + `${reason}\n`
+        + `${reason.sourceURL}:${reason.line}:${reason.column}\n`
+        + `${reason.stack}`
+      );
+    });
+    addEventListener('error', event => {
+      const reason = event.error;
+      alert(
+        'Unhandled error\n'
+        + `${reason}\n`
+        + `${reason.sourceURL}:${reason.line}:${reason.column}\n`
+        + `${reason.stack}`
+      );
+      return true; // Used for not to show error message on console
+    });
+  </script>
 </html>
