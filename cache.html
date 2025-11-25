@@ -69,8 +69,8 @@ h1 {
     function redirectToIndex() {
         if (redirected) return;
         redirected = true;
-        // Rediriger avec paramètre pour indiquer qu'on vient du cache
-        window.location.replace("index.html?cached=1");
+        localStorage.setItem("ps4_cached", "true");
+        window.location.replace("index.html");
     }
     
     // Événement quand les fichiers sont mis en cache pour la première fois
