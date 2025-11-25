@@ -1,4 +1,4 @@
-<html>
+<html manifest="84ciss.manifest">
   <head>
     <meta charset="utf-8">
     <title>PS4 Jailbreak</title>
@@ -117,6 +117,15 @@ button:hover {
     </script>
   </body>
   <script>
+    // DÉTECTION MISE À JOUR - Redirection vers cache.html
+    if (window.applicationCache) {
+        window.applicationCache.addEventListener('downloading', function(e) {
+            console.log('[Cache] Update downloading - Redirect to cache.html');
+            localStorage.removeItem("ps4_cached");
+            window.location.replace("cache.html");
+        }, false);
+    }
+    
     // Logging utility
     const outputConsole = document.getElementById("console");
     window.log = (msg) => { outputConsole.textContent += msg + "\n"; };
