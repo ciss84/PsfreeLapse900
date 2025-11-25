@@ -117,6 +117,17 @@ button:hover {
     </script>
   </body>
   <script>
+    // FORCER LE LANCEMENT DU JAILBREAK après redirection depuis cache.html
+    window.addEventListener('load', function() {
+        // Si load_exploit existe et que le cache est prêt
+        if (typeof load_exploit === 'function' && localStorage.getItem("ps4_cached")) {
+            console.log('[JB] Cache ready - Starting jailbreak...');
+            setTimeout(function() {
+                load_exploit();
+            }, 500);
+        }
+    });
+    
     // DÉTECTION MISE À JOUR - Redirection vers cache.html
     if (window.applicationCache) {
         window.applicationCache.addEventListener('downloading', function(e) {
