@@ -110,29 +110,4 @@ button:hover {
         }
     </script>
   </body>
-<script>
-    // Logging utility
-    const outputConsole = document.getElementById("console");
-    window.log = (msg) => { outputConsole.textContent += msg + "\n"; };
-    // Event definitions
-    addEventListener('unhandledrejection', event => {
-      const reason = event.reason;
-      alert(
-        'Unhandled rejection\n'
-        + `${reason}\n`
-        + `${reason.sourceURL}:${reason.line}:${reason.column}\n`
-        + `${reason.stack}`
-      );
-    });
-    addEventListener('error', event => {
-      const reason = event.error;
-      alert(
-        'Unhandled error\n'
-        + `${reason}\n`
-        + `${reason.sourceURL}:${reason.line}:${reason.column}\n`
-        + `${reason.stack}`
-      );
-      return true; // Used for not to show error message on console
-    });
-  </script>
 </html>
