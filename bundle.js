@@ -4865,7 +4865,6 @@ function checkPlatformIsSupported() {
 // Main Jailbreak Function =======================================================================
 //================================================================================================
 async function doJBwithPSFreeLapseExploit() {
-  StartTimer();
   if (!checkPlatformIsSupported()) {
     window.log("Unsupported platform detected! Designed for PS4 9.00");
     /*
@@ -4893,6 +4892,21 @@ async function doJBwithPSFreeLapseExploit() {
     */
     return;
   }
+  
+  // Check if already jailbroken (prevents crash on cache reload)
+  try {
+    const test_fd = syscall(5, '/dev/bpf', 0, 0); // open syscall
+    if (test_fd >= 0) {
+      syscall(6, test_fd); // close syscall
+      window.log("System already jailbroken! Skipping exploit...");
+      window.log("Kernel already patched from previous run.");
+      window.log("\nYou can close this page or load payloads.");
+      return;
+    }
+  } catch(e) {
+    // Not jailbroken yet, continue with exploit
+  }
+  
   window.log("Starting PSFree Exploit...");
   config_target = 0x900;
   try {
@@ -4943,15 +4957,15 @@ async function doJBwithPSFreeLapseExploit() {
     }
     await lapse_init();
     try {
-        if (chain.sys('setuid', 0) == 0) {
-            showMessage("GoldHen already loaded !..."),
-            window.log("GoldHen already loaded !.");
-            done_exploit();
-            return true;
-        }
+      chain.sys('setuid', 0);
     }
-    catch (e) {}
-
+    catch (e) {
+      localStorage.ExploitLoaded = "no";
+    }
+    if (localStorage.ExploitLoaded === "yes" && sessionStorage.ExploitLoaded != "yes") {
+      runBinLoader();
+      return new Promise(() => {}); // In order to keep BinLoader always alive
+    }
     // if the first thing you do since boot is run the web browser, WebKit can
     // use all the cores
     const main_mask = new Long();
@@ -4987,18 +5001,7 @@ async function doJBwithPSFreeLapseExploit() {
     window.log('Lapse STAGE 4/5: Get arbitrary kernel read/write');
     const [kbase, kmem, p_ucred, restore_info] = make_kernel_arw(pktopts_sds, dirty_sd, reqs1_addr, kernel_addr, sds);
     window.log('Lapse STAGE 5/5: Patch kernel');
-    // Check if kernel is already patched by reading ucred caps
-    const cap0 = kmem.read64(p_ucred.add(0x60));
-    const cap1 = kmem.read64(p_ucred.add(0x68));
-    const already_patched = (cap0.low === -1 && cap0.high === -1 && cap1.low === -1 && cap1.high === -1);
-    
-    if (already_patched) {
-      window.log("\nKernel already patched (ucred caps = 0xFFFFFFFFFFFFFFFF), skipping patch...");
-    } else {
-      await patch_kernel(kbase, kmem, p_ucred, restore_info);
-      window.log("\nKernel patches applied");
-    }
-    
+    await patch_kernel(kbase, kmem, p_ucred, restore_info);
     close(unblock_fd);
     close(block_fd);
     free_aios2(groom_ids.addr, groom_ids.length);
@@ -5018,17 +5021,12 @@ async function doJBwithPSFreeLapseExploit() {
     window.log("AIO fixes applied");
     await sleep(500); // Wait 500ms
     // Inject HEN payload
-    jb_step_status = await PayloadLoader("goldhen.bin", 1); // Read payload from .bin file
+    jb_step_status = await PayloadLoader("payload.bin", 1); // Read payload from .bin file
     if (jb_step_status !== 1) {
       window.log("Failed to load HEN!\nPlease restart console and try again...");
-      localStorage.failcount = ++localStorage.failcount;window.failCounter.innerHTML=localStorage.failcount;
       return;
     }
-    showMessage("GoldHen Loaded Successfully !..."),
-    window.log("GoldHen Loaded Successfully !...");
-    load_exploit_done();
-    localStorage.passcount = ++localStorage.passcount;window.passCounter.innerHTML=localStorage.passcount;
-    EndTimer();   
+    window.log("GoldHen loaded\n\nPSFree+Lapse Webkit by Kameleon\nAIO Fix by ABC");
   } catch (error) {
     window.log("An error occured during Lapse\nPlease restart console and try again...\nError definition: " + error);
   }
