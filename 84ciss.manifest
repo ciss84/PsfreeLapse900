@@ -1,19 +1,32 @@
-CACHE MANIFEST
-# PS4 Jailbreak v2.0 - Fw 9.00
+CACHE MANIFEST 
+#VERSION 1.1 
 
-cache.html
-index.html
-bundle.js
-payload.js
-loader.js
-hen.png
-Style.css
+CACHE: 
 1.jpg
 2.jpg
 3.jpg
 4.jpg
 5.jpg
+6.jpg
+aio_patches.bin
+bundle.js
+bundle_reference.js
+cache.html
+goldhen.bin
+hen.png
+index.html
+loader.js
+payload.js
+Style.css
 theme.html
+payloads\backup.bin
+payloads\disabled_update.bin
+payloads\enabled_update.bin
+payloads\gamedumper.bin
+payloads\installergta5rdr2prx.bin
+payloads\pkgbackup.bin
+payloads\ps4debug.bin
+payloads\restore.bin
 
-NETWORK:
-*
+NETWORK: 
+* 

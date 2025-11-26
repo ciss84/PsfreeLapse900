@@ -33,6 +33,11 @@ button:hover {
             }
 	</style>
     <title>PS4 Jailbreak Auto GoldHen v2.0(Psfree & Lapse 9.00)</title>
+    <script>
+        function showMessage(msg) {
+            document.getElementById("message").innerHTML = msg;
+        }
+    </script>
   </head>
 <body>
 <div id="jb-progress">
@@ -51,40 +56,42 @@ button:hover {
     <font style='color:#87FF33'>Modder & Dev : </font><a href="https://twitter.com/84Ciss" style='font-size:20px;text-align:center;color:yellow;'>@84Ciss</a> - Find Me In Tweeter if you have any kind of issues !
     <br>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<font style='color:#87FF33'>Special thanks : </font>*Many Many Thanks to all Contributors in PS4 Scene ∆❍X❑*<br>
 </div>
-<div id='console'></div>
+<script type="text/javascript">
+ if(localStorage.getItem("theme")==null){
+   localStorage.setItem("theme","2.jpg")
+ }
+ document.body.style.background = "url('"+localStorage.getItem("theme")+"')"
+ document.body.style.backgroundSize = "cover"
+</script>
   </body>
   <script>
     // Clear history and prevent back navigation
     history.replaceState(null, null, 'cache.html');
     var histlength = history.length;
     history.go(-histlength);
-    // Logging utility
-    const outputConsole = document.getElementById("console");
-    window.log = (msg) => { outputConsole.textContent += msg + "\n"; };
+    
     // Download progress (% display)
     function DLProgress(e) {
       const percent = (Math.round((e.loaded / e.total) * 100));
-      window.log(`[CACHE] Downloading... ${percent}% complete.`);
+      showMessage(`Installing Cache... ${percent}% Please, <font color="#ee596f">WAIT!!!</font>`);
     }
+    
     // On cache complete
     function DisplayCacheProgress() {
-      window.log(" ");
-      window.log("[SUCCESS] Cache installed successfully.");
-      window.log("Page will reload in 3 seconds...");
-      // Delay to show success message before navigation
-      setTimeout(function() { window.log("Reloading..."); }, 2000);
-      // Navigate back to index.html to load the exploit from cache
-      setTimeout(function() { location.reload(); }, 3000);
+      showMessage("Cache installed! Redirecting... <font color='#87FF33'>DONE!</font>");
+      setTimeout(function() { 
+        window.location.href = "index.html";
+      }, 2000);
     }
+    
     // Event listeners
     window.applicationCache.addEventListener("progress", DLProgress, false);
     window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
     window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
-    // Initialization message on DOM load
+    
+    // Initialization
     document.addEventListener('DOMContentLoaded', () => {
-      outputConsole.textContent = ""; // Clear console log
-      window.log("AppCache download initiating...");
-      window.log("Please wait, this may take a few seconds.");
+      showMessage("Installing Cache. Please, <font color='#ee596f'>WAIT!!!</font>");
     });
   </script>
 </html>
