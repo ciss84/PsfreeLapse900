@@ -1,97 +1,144 @@
-<html manifest="84ciss.manifest">
-  <head>
-    <meta charset="utf-8">
-    <title>PS4 Jailbreak</title>
-<link rel="stylesheet prefetch" href="Style.css">
-	<style>
-		body{background-image: url('');background-color:#111112;background-attachment:fixed;background-size:100%;background-repeat:no-repeat;font-family:system-ui;text-align:center}button:-moz-focus-inner, button:focus{outline:0;border:none}button{font-family:arial;font-size:20px;text-transform:uppercase;font-weight:700;border:2px solid #404040;border-radius:4px;padding:10px;cursor:pointer;display:inline-block;text-decoration:none;background:0 0;color:#d4d7d8;box-shadow:0 5px 0 #878787} button:hover{font-size:20px;background:#032140;border:2px solid #fff;box-shadow:0 5px 0 #ccc;color:#fff} button:active{background:#ee596f;position:relative;color:#000;top:5px;box-shadow:none}
-button {
-    background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 5px 20px 0 white;
-    border: 2px solid black;
-    border-radius: 100px 10px / 120px;
-    color: white;
-    text-decoration: none;
-    width: 180px;
-    height: 40px;
-    display: inline-table;
+<html manifest="84ciss.manifest"><head>
+<title>Auto Cache(FW 9.00)</title>
+<script>history.replaceState(null,null,'index.html');</script>
+</head>
+<style>
+body {
     font-family: system-ui;
     text-align: center;
-    text-transform: none;
+    background-color: #111112;
+    color: white;
 }
-
-button:focus,
-button:hover {
-    color: White;
-    box-shadow: 0 5px 50px 0 white;
-    background-color: #032140;
-    border-radius: 100px 10px / 120px;
+h1 {
+    color: #fff;
+    font-size: 46px;
+    font-weight: bold;
+    text-shadow: 3px 2px #3d3939;
 }
-
-            #console {
-                font-family: 'logging';
-            }
-	</style>
-    <title>PS4 Jailbreak Auto GoldHen v2.0(Psfree & Lapse 9.00)</title>
-    <script>
-        function showMessage(msg) {
-            document.getElementById("message").innerHTML = msg;
-        }
-    </script>
-  </head>
+#progress {
+    font-size: 35px;
+    font-weight: bold;
+    text-shadow: 3px 2px #3d3939;
+    color: #fff;
+}
+#progress2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #87FF33;
+    text-shadow: 3px 2px #3d3939;
+    margin-top: 20px;
+    display: none;
+}
+.ready {
+    color: #87FF33;
+}
+</style>
 <body>
-<div id="jb-progress">
-    <div id="notify"  style="display:;">
-        <img src="hen.png" alt="" width="100px" height="100px">
-        <p id="log"></p>
-    </div>
-    <br><h1><center><font style='color:#fff;font-size:46px;font-weight:bold;margin:0 0 0 0.0;text-shadow:3px 2px #3d3939;'><i>PS4 Jailbreak v2.0 (Fw 9.00)</i></font></center></h1>
-    <div>
-    <center><font style='color:#fff;font-size:26px;font-weight:bold;margin:0 0 0 0.0;text-shadow:3px 2px #3d3939;'><i>Auto GoldHen</i></font></center>
-    </div>
-    <br><br><br><br><br><br><br><br>
-    <div id="message" style='color:#fff;font-size:35px;font-weight:bold;margin:0 0 0 0.0;text-shadow:3px 2px #3d3939;'>Installing Cache. Please, <font color="#ee596f">WAIT!!!</font></div>
-    <br><br><br><br><br><br><br>
-    <div style="background-color:#032140;color:white;position:fixed;left:0;bottom:-0px;width:100%;text-align:center;">
-    <font style='color:#87FF33'>Modder & Dev : </font><a href="https://twitter.com/84Ciss" style='font-size:20px;text-align:center;color:yellow;'>@84Ciss</a> - Find Me In Tweeter if you have any kind of issues !
-    <br>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<font style='color:#87FF33'>Special thanks : </font>*Many Many Thanks to all Contributors in PS4 Scene ∆❍X❑*<br>
+<br><br><br>
+<h1><i>PS4 Jailbreak v2.0 (Fw 9.00)</i></h1>
+<br><br><br><br>
+<div id="progress">
+    Caching files, please wait...
 </div>
+<div id="progress2">
+    Caching Update files, please wait...
+</div>
+<br><br><br><br><br><br>
+<div style="background-color:#032140;color:white;position:fixed;left:0;bottom:-0px;width:100%;text-align:center;">
+<font style='color:#87FF33'>Modder & Dev : </font><a href="https://twitter.com/84Ciss" style='font-size:20px;text-align:center;color:yellow;'>@84Ciss</a> - Find Me In Tweeter if you have any kind of issues !&nbsp;
+<br><font style='color:#87FF33'>Special thanks : </font>*Many Many Thanks to all Contributors in PS4 Scene ∆❍X❑*<br>
+</div>
+
+<script>
+    var progress = document.getElementById('progress');
+    var progress2 = document.getElementById('progress2');
+    var redirected = false;
+    
+    // Détecter si c'est un UPDATE (venant de index.html avec manifest)
+    var isUpdate = (document.referrer && document.referrer.indexOf('index.html') !== -1);
+    
+    // Si c'est un update, afficher le message spécial
+    if (isUpdate) {
+        progress.style.display = 'none';
+        progress2.style.display = 'block';
+        console.log('[Cache] Mode UPDATE détecté');
+    } else {
+        console.log('[Cache] Mode PREMIER CACHE détecté');
+    }
+    
+    function redirectToIndex() {
+        if (redirected) return;
+        redirected = true;
+        localStorage.setItem("ps4_cached", "true");
+        window.location.replace("index.html");
+    }
+    
+    // Événement quand les fichiers sont mis en cache pour la première fois
+    window.applicationCache.addEventListener('cached', function() {
+        if (isUpdate) {
+            progress2.innerHTML = '<span class="ready">Update complete! Redirecting...</span>';
+        } else {
+            progress.innerHTML = '<span class="ready">Cache complete! Redirecting...</span>';
+        }
+        setTimeout(redirectToIndex, 800);
+    }, false);
+    
+    // Événement quand le cache est mis à jour
+    window.applicationCache.addEventListener('updateready', function() {
+        if (isUpdate) {
+            progress2.innerHTML = '<span class="ready">Update ready! Redirecting...</span>';
+        } else {
+            progress.innerHTML = '<span class="ready">Cache updated! Redirecting...</span>';
+        }
+        setTimeout(redirectToIndex, 800);
+    }, false);
+    
+    // Si déjà en cache (IDLE ou UPDATEREADY), rediriger immédiatement
+    if (window.applicationCache.status == 1 || window.applicationCache.status == 4) {
+        if (isUpdate) {
+            progress2.innerHTML = '<span class="ready">Already cached! Redirecting...</span>';
+        } else {
+            progress.innerHTML = '<span class="ready">Already cached! Redirecting...</span>';
+        }
+        setTimeout(redirectToIndex, 300);
+    }
+    
+    // Gestion des erreurs de cache
+    window.applicationCache.addEventListener('error', function() {
+        if (isUpdate) {
+            progress2.innerHTML = '<span style="color:#ee596f">Cache error! Redirecting anyway...</span>';
+        } else {
+            progress.innerHTML = '<span style="color:#ee596f">Cache error! Redirecting anyway...</span>';
+        }
+        setTimeout(redirectToIndex, 1500);
+    }, false);
+</script>
 <script type="text/javascript">
  if(localStorage.getItem("theme")==null){
    localStorage.setItem("theme","2.jpg")
  }
  document.body.style.background = "url('"+localStorage.getItem("theme")+"')"
  document.body.style.backgroundSize = "cover"
+ var imgs = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg"];
+ render()
+ function render(){
+     document.querySelector(".themes").innerHTML=""
+	 for(let i=0;i<imgs.length;i++){
+	    var selectText = "Select"
+	    var textColor = "white"
+	    if(localStorage.theme==imgs[i]){
+	      selectText="Selected"
+	      textColor="green"
+	    }
+	 	document.querySelector(".themes").innerHTML+='<div class="theme" ><img src="'+imgs[i]+'" ><span style="color:'+textColor+';" onclick="set('+i+')">'+selectText+'</span></div>';
+	 }
+ }
+ function set(i){
+    localStorage.setItem("theme",imgs[i])
+    render()
+ 	document.body.style.background = "url('"+imgs[i]+"')"
+ 	document.body.style.backgroundSize = "cover"
+ }
 </script>
-  </body>
-  <script>
-    // Clear history and prevent back navigation
-    history.replaceState(null, null, 'cache.html');
-    var histlength = history.length;
-    history.go(-histlength);
-    
-    // Download progress (% display)
-    function DLProgress(e) {
-      const percent = (Math.round((e.loaded / e.total) * 100));
-      showMessage(`Installing Cache... ${percent}% Please, <font color="#ee596f">WAIT!!!</font>`);
-    }
-    
-    // On cache complete
-    function DisplayCacheProgress() {
-      showMessage("Cache installed! Redirecting... <font color='#87FF33'>DONE!</font>");
-      setTimeout(function() { 
-        window.location.href = "index.html";
-      }, 2000);
-    }
-    
-    // Event listeners
-    window.applicationCache.addEventListener("progress", DLProgress, false);
-    window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
-    window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
-    
-    // Initialization
-    document.addEventListener('DOMContentLoaded', () => {
-      showMessage("Installing Cache. Please, <font color='#ee596f'>WAIT!!!</font>");
-    });
-  </script>
+</body>
 </html>
